@@ -1,3 +1,7 @@
+export interface ProductData {
+  data: Product[];
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -7,4 +11,5 @@ export interface Product {
   images?: string[];
   category?: string;
   stock?: number;
+
 }

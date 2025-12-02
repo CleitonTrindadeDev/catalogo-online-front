@@ -1,1 +1,87 @@
-<p>product-card works!</p>
+<!-- <div class="products-grid">
+
+    @for (product of products; track product.id) {
+    <div class="product-card">
+        <h2 class="product-title">{{ product.titulo }}</h2>
+
+        <img class="product-image" [src]="product.images[0]" [alt]="product.name" />
+
+
+        <p class="product-description">
+            {{ product.descricao_breve }}
+        </p>
+
+        <p class="product-price">
+            {{ product.preco | currency  :'BRL':'symbol':'1.2-2' }}
+        </p>
+
+    </div>
+    }
+
+</div> -->
+
+<!-- LISTA DE PRODUTOS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+    @for (product of products; track product.id) {
+    <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4">
+
+        <img [src]="product.image" alt="{{ product.name }}" class="w-full h-48 object-cover rounded-lg mb-3" />
+
+        <h2 class="text-lg font-semibold text-gray-800">
+            {{ product.name }}
+        </h2>
+
+        <p class="text-sm text-gray-500 mt-1 line-clamp-2">
+            {{ product.description }}
+        </p>
+
+        <p class="text-xl font-bold text-blue-600 mt-3">
+            {{ product.price | currency:'BRL':'symbol':'1.2-2':'pt' }}
+        </p>
+
+        <button class="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition"
+            (click)="openModal(product)">
+            Ver detalhes
+        </button>
+
+    </div>
+    }
+</div>
+
+
+
+
+<!-- =======================
+      MODAL DE DETALHES
+======================= -->
+@if (showModal) {
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 relative animate-fadeIn">
+
+        <button class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" (click)="closeModal()">
+            ✕
+        </button>
+
+        <img [src]="selectedProduct?.image" class="w-full h-60 object-cover rounded-lg mb-4" />
+
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">
+            {{ selectedProduct?.name }}
+        </h2>
+
+        <p class="text-gray-600 mb-4">
+            {{ selectedProduct?.description }}
+        </p>
+
+        <p class="text-3xl font-extrabold text-blue-600 mb-4">
+            {{ selectedProduct?.price | currency:'BRL':'symbol':'1.2-2':'pt' }}
+        </p>
+
+        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg transition">
+            Adicionar ao carrinho
+        </button>
+
+    </div>
+
+</div>
+}
