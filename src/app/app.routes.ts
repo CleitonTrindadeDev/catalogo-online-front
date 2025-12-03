@@ -13,5 +13,13 @@ export const routes: Routes = [
             import('./pages/categorys/categorys.component')
                 .then(m => m.CategorysComponent)
     },
-    { path: '**', redirectTo: '' }
+    {
+        path: 'about',
+        loadComponent: () =>
+            import('./pages/about/about.component')
+                .then(m => m.AboutComponent)
+    },
+    { path: '**', redirectTo: '' },
+
+
 ];

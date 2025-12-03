@@ -1,4 +1,5 @@
 <!-- <div class="bg-[url(/img/mountains.jpg)] ..."></div> -->
 <div class="products-container">
+    <app-filter-product (filterEmmiter)="onFilter($event)"></app-filter-product>
     <app-product-card [products]="products"></app-product-card>
 </div>
