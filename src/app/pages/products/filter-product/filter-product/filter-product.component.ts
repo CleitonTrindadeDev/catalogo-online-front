@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,21 +11,25 @@ import { CommonModule } from '@angular/common';
 })
 export class FilterProductComponent {
   @Output() filterEmmiter = new EventEmitter<any>();
-  categoryControl = new FormControl('');
-  searchControl = new FormControl('');
-
+  filterForm: FormGroup;
   categories = [
     { id: 1, name: 'Roupas' },
     { id: 2, name: 'Eletrônicos' },
     { id: 3, name: 'Acessórios' }
   ];
 
-  applyFilter() {
-    this.filterEmmiter.emit({
-      category: this.categoryControl.value,
-      search: this.searchControl.value
-    });
-  
 
+  constructor() {
+    this.filterForm = new FormGroup({
+      category: new FormControl(''),
+      product: new FormControl('')
+    });
+  }
+
+  applyFilter() {
+    console.log(this.filterForm.value);
+    this.filterEmmiter.emit(
+      this.filterForm.value
+    );
   }
 }

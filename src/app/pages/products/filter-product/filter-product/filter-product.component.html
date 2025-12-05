@@ -1,37 +1,39 @@
 <div class="w-full bg-white p-4 rounded-xl shadow flex flex-col md:flex-row gap-4">
+    <form [formGroup]="filterForm" class="w-full flex flex-col md:flex-row gap-4">
+        <div class="flex-1">
+
+            <select placeholder="Selecinar categoria..."
+                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                formControlName="category">
+                <option value="">Todas as categorias</option>
+
+                @for (cat of categories; track cat.id) {
+                <option [value]="cat.id">
+                    {{ cat.name }}
+                </option>
+                }
+            </select>
+        </div>
+
+        <!-- INPUT DE PESQUISA -->
+        <div class="flex-1">
+
+
+            <input type="text" placeholder="Buscar produto..."
+                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                formControlName="product" />
+        </div>
+
+        <!-- BOTÃO -->
+        <div class="flex items-end">
+            <button type="button" (click)="applyFilter()"
+                class="w-full md:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                Filtrar
+            </button>
+        </div>
+    </form>
 
     <!-- SELECT DE CATEGORIAS -->
-    <div class="flex-1">
-  
-        <select
-        placeholder="Selecinar categoria..."
-            class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            [formControl]="categoryControl">
-            <option value="">Todas as categorias</option>
 
-            @for (cat of categories; track cat.id) {
-            <option [value]="cat.id">
-                {{ cat.name }}
-            </option>
-            }
-        </select>
-    </div>
-
-    <!-- INPUT DE PESQUISA -->
-    <div class="flex-1">
-       
-
-        <input type="text" placeholder="Buscar produto..."
-            class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            [formControl]="searchControl" />
-    </div>
-
-    <!-- BOTÃO -->
-    <div class="flex items-end">
-        <button (click)="applyFilter()"
-            class="w-full md:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-            Filtrar
-        </button>
-    </div>
 
 </div>

@@ -20,13 +20,17 @@ export class ProductsComponent implements OnInit {
   }
 
   onFilter(event: any) {
-    console.log('Filtro aplicado:', event);
+    this.getProducts(event);
   } 
 
-  getProducts(): void {
-    this.productService.list().subscribe(response => {
+  getProducts(params?:any): void {
+    const paramsFilter = {
+      category: params?.category || '',
+      product: params?.product || ''
+    }
+    console.log(params);
+    this.productService.getProducts('produtos',paramsFilter).subscribe(response => {
       this.products = response.data;
-      console.log(this.products);
     })
   }
 
